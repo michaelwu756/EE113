@@ -1,0 +1,10 @@
+n = 0:24;
+m = [5 0 0 5/2 0 0 0 15/2 0 0 0 0 0 0 0 0 0 0 15/2 0 0 0 5/2 0 0];
+p = [0 0 0 0 0 0 0 -pi/2 0 0 0 0 0 0 0 0 0 0 pi/2 0 0 0 0 0 0];
+stem(n, m);
+set(gcf,'color','w');
+title('Magnitude');
+export_fig problem4-mag.pdf;
+stem(n, p);
+title('Phase');
+export_fig problem4-phase.pdf;
