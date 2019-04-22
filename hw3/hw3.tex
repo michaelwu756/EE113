@@ -100,7 +100,7 @@ The following output equation fits this behavior.
 \section*{Problem 4}
 
 This function has a period of \(N=25\). Thus our fourier transform coefficients have the following form.
-\[c_k=\frac{1}{5}\sum_{n=0}^{24}x[n] e^{-j\frac{2\pi k}{25}n}\]
+\[c_k=\frac{1}{25}\sum_{n=0}^{24}x[n] e^{-j\frac{2\pi k}{25}n}\]
 We can rewrite our function as follows.
 \begin{align*}
     x[n] &= 1+\cos(0.24\pi n)+3\sin(0.56\pi n)\\
@@ -112,12 +112,12 @@ Thus the only coefficients that are not zero would be \(c_0\), \(c_3\), \(c_7\),
 these values of \(k\) have a corresponding frequency component in \(x[n]\). We can select the correct
 frequency components and calculate the coefficients as follows.
 \begin{align*}
-    c_0 &= \frac{1}{5}\sum_{n=0}^{24}1e^{-j\frac{2\pi \times 0}{25}n}\\
-    &=\frac{1}{5}\sum_{n=0}^{24}1\\
-    &=5
+    c_0 &= \frac{1}{25}\sum_{n=0}^{24}1e^{-j\frac{2\pi \times 0}{25}n}\\
+    &=\frac{1}{25}\sum_{n=0}^{24}1\\
+    &=1
 \end{align*}
 Similar calculations yield the following coefficients.
-\[c_0=5\qquad c_3=\frac{5}{2}\qquad c_7=\frac{15}{2j}\qquad c_{18}=-\frac{15}{2j}\qquad c_{22}=\frac{5}{2}\]
+\[c_0=1\qquad c_3=\frac{1}{2}\qquad c_7=\frac{3}{2j}\qquad c_{18}=-\frac{3}{2j}\qquad c_{22}=\frac{1}{2}\]
 The magnitude and phase plots of the DTFS coefficients is shown below.
 \begin{figure}[H]
     \begin{center}
