@@ -1,0 +1,34 @@
+fs = 100;
+t = 0:1/fs:50;
+x = 2*sin(2*pi*30*t)+3*sin(2*pi*20*(t-2))+3*sin(2*pi*10*(t-4));
+N = length(x);
+omega = 2*pi*(0:N-1)/N;
+omega = fftshift(omega);
+omega = unwrap(omega - 2*pi);
+X = fft(x, N);
+X = X/max(X);
+set(gcf,'color','w');
+plot(omega, abs(fftshift(X)), 'LineWidth', 2);
+title('DTFT of x[n]', 'fontsize', 14);
+set(gca, 'fontsize', 14);
+xlabel('Radians', 'fontsize', 14);
+export_fig problem5a.pdf;
+
+wr = t<=2;
+Xr = fft(x.*wr, N);
+Xr = Xr/max(Xr);
+plot(omega, abs(fftshift(Xr)), 'LineWidth', 2);
+title('DTFT of x[n]w_r[n]', 'fontsize', 14);
+set(gca, 'fontsize', 14);
+xlabel('Radians', 'fontsize', 14);
+export_fig problem5b.pdf;
+
+wh = hamming(2*fs + 1).';
+wh(N) = 0;
+Xh = fft(x.*wh, N);
+Xh = Xh/max(Xh);
+plot(omega, abs(fftshift(Xh)), 'LineWidth', 2);
+title('DTFT of x[n]w_h[n]', 'fontsize', 14);
+set(gca, 'fontsize', 14);
+xlabel('Radians', 'fontsize', 14);
+export_fig problem5c.pdf;
