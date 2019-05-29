@@ -1,0 +1,58 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\begin{document}
+\title{Electrical Engineering 113, Homework 6}
+\date{May 29th, 2019}
+\author{Michael Wu\\UID: 404751542}
+\maketitle
+
+\section*{Problem 1}
+
+The period of the cosine term is 10. Then the circular convolution is equivalent to a regular convolution which shifts the original
+signal to the left by 2. Our final signal is then \(x[n]=\cos(-0.2\pi n)\). This has two DTFS coefficients with magnitude \(\frac{1}{2}\)
+and the rest are 0. From Parseval's theorem we know that the power is equal to the sum of the squares of the DTFS coefficients.
+\[p = \left(\frac{1}{2}\right)^2 + \left(\frac{1}{2}\right)^2 = \frac{1}{2}\]
+
+\section*{Problem 2}
+
+\paragraph{a)}
+
+\begin{align*}
+    X(\Omega) &= \sum_{n=0}^{N_1-1} x[n] e^{-j\Omega n}\\
+    X\left(\frac{2\pi k}{N_2}\right) &= \sum_{n=0}^{N_1-1} x[n] e^{-j\frac{2\pi k}{N_2} n}\\
+    &= \sum_{n=0}^{N_2-1} x[n] e^{-j\frac{2\pi k}{N_2} n} + \sum_{n=N_2}^{N_1-1} x[n] e^{-j\frac{2\pi k}{N_2} n}\\
+    &= \sum_{n=0}^{N_2-1} x[n] e^{-j\frac{2\pi k}{N_2} n} + \sum_{n=0}^{N_1-1-N_2} x[n+N_2] e^{-j\frac{2\pi k}{N_2} n}\\
+    &= \sum_{n=0}^{N_2-1} (x[n] + x[n+N_2] )e^{-j\frac{2\pi k}{N_2} n} + \sum_{n=0}^{N_1-1-2N_2} x[n+2N_2] e^{-j\frac{2\pi k}{N_2} n}\\
+    &= \sum_{n=0}^{N_2-1} (x[n] + x[n+N_2] + \ldots)e^{-j\frac{2\pi k}{N_2} n}\\
+    &= \sum_{n=0}^{N_2-1} \sum_{l=-\infty}^\infty x[n-lN_2] e^{-j\frac{2\pi k}{N_2} n}\\
+    &= Y[k]
+\end{align*}
+
+Note that the right sum will go to zero as we continually wrap the sum so that the exponential terms align, because eventually \(N_1-1-mN_2<0\) for some
+integer \(m\). We can keep the exponential terms the same because we take out factors of \(e^{-j2\pi}=1\). In the periodic extension we can
+ignore when \(l>0\) since \(x[n]=0\) for \(n<0\), and they will contribute nothing to the DFT. Thus \(X\left(\frac{2\pi k}{N_2}\right)\) is the
+DFT of \(y[n]\).
+
+\paragraph{b)}
+
+\begin{align*}
+    X\left(\frac{2\pi k}{N}\right)&= \sum_{n=0}^\infty a^n e^{-j\frac{2\pi k}{N} n}\\
+    &=\sum_{n=0}^{N-1} a^n e^{-j\frac{2\pi k}{N} n} + \sum_{n=N}^\infty a^n e^{-j\frac{2\pi k}{N} n}\\
+    &=\sum_{n=0}^{N-1} a^n e^{-j\frac{2\pi k}{N} n} + \sum_{n=0}^\infty a^{n+N} e^{-j\frac{2\pi k}{N} n}\\
+    &=\sum_{n=0}^{N-1} (1+a^N)a^n e^{-j\frac{2\pi k}{N} n} + \sum_{n=0}^\infty a^{n+2N} e^{-j\frac{2\pi k}{N} n}\\
+    &=\sum_{n=0}^{N-1} (1+a^N+\ldots)a^n e^{-j\frac{2\pi k}{N} n}\\
+    y[n]&=(1+a^N+\ldots)a^n=\frac{1}{1-a}a^n\qquad \text{for } 0\leq n \leq N-1\\
+    y_{ps}[n]&=\sum_{l=-\infty}^{\infty}y[n-lN]
+\end{align*}
+
+\section*{Problem 3}
+
+\begin{align*}
+    X(z) &= \sum_{n=-\infty}^\infty x[n] z^{-n}\\
+    &= \sum_{n=-\infty}^\infty (x[2n] z^{-2n} + x[2n + 1] z^{-(2n+1)})\\
+    &= \sum_{n=0}^\infty (0.2^nz^{-2n} + 0.1^n z^{-2n+1})\\
+    &= \sum_{n=0}^\infty \left(\left(0.2z^{-2}\right)^n + \frac{\left(0.1z^{-2}\right)^n}{z}\right)\\
+    &=\frac{1}{1-0.2z^{-2}} + \frac{z^{-1}}{1-0.1z^{-2}}
+\end{align*}
+
+\end{document}
