@@ -1,0 +1,96 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\begin{document}
+\title{Electrical Engineering 113, Homework 7}
+\date{June 5th, 2019}
+\author{Michael Wu\\UID: 404751542}
+\maketitle
+
+\section*{Problem 1}
+
+\paragraph{a)}
+
+\[X(z)=\sum_{n=1}^9 nz^{-n}\]
+This is a polynomial with 9 terms and converges for \(|z|>0\).
+
+\paragraph{b)}
+
+\[X(z)=\sum_{n=1}^9 nz^{-n} + \frac{10z^{-10}}{1-z^{-1}}\]
+This has a region of convergence for \(|z|>1\).
+
+\paragraph{c)}
+
+\[X(z)=\sum_{n=1}^9 nz^{-n} + \sum_{n=10}^{19} (20-n)z^{-n}\]
+This is a polynomial with 19 terms and converges for \(|z|>0\).
+
+\section*{Problem 2}
+
+\paragraph{a)}
+
+We can use partial fraction expansion to rewrite the equation in the following form.
+\[X(z)=\frac{1}{1-z^{-1}}+\frac{1}{1-2 z^{-1}}\]
+If \(|z|>2\) then each of these terms take the form \(a^nu[n]\) and we obtain the following inverse.
+\[x[n]=(1+2^n)u[n]\]
+
+\paragraph{b)}
+
+If \(1<|z|<2\) then the right term takes the form \(-a^nu[-n-1]\) and we obtain the following inverse.
+\[x[n]=u[n] - 2^nu[-n-1]\]
+
+\section*{Problem 3}
+
+\paragraph{a)}
+
+We have the following \(z\) transforms.
+\[X(z) = \frac{1}{1-\frac{z^{-1}}{2}}\]
+This has a ROC of \(|z|>\frac{1}{2}\).
+\begin{align*}
+    Y(z)&= -z\frac{d}{dz}\left(z^{-1}\frac{1}{1-\frac{z^{-1}}{2}}\right)\\
+    &= -z\frac{d}{dz}\left(\frac{1}{z-\frac{1}{2}}\right)\\
+    &= \frac{z}{\left(z-\frac{1}{2}\right)^2}\\
+    &= \frac{z}{z^2\left(1-\frac{z^{-1}}{2}\right)^2}\\
+    &= \frac{z^{-1}}{\left(1-\frac{z^{-1}}{2}\right)^2}
+\end{align*}
+This also has a ROC of \(|z|>\frac{1}{2}\). Thus the transfer function is the following.
+\[\frac{Y(z)}{X(z)}=\frac{z^{-1}}{1-\frac{z^{-1}}{2}}\]
+This has a ROC of \(|z|>\frac{1}{2}\).
+
+\paragraph{b)}
+
+There is a zero at infinity and a pole at \(z=\frac{1}{2}\).
+
+\paragraph{c)}
+
+\begin{align*}
+    \left(1-\frac{z^{-1}}{2}\right)Y(z) &= z^{-1}X(z)\\
+    y[n] - \frac{1}{2} y[n-1] &= x[n-1]
+\end{align*}
+
+\section*{Problem 4}
+
+\paragraph{a)}
+
+\begin{align*}
+    H(z)&=\frac{1}{\left(1-\frac{1}{2}z^{-1}\right)\left(1+\frac{1}{3}z^{-1}\right)}\\
+    &=\frac{3}{5\left(1-\frac{1}{2}z^{-1}\right)}+\frac{2}{5\left(1+\frac{1}{3}z^{-1}\right)}\\
+    h[n]&=\left(\frac{3}{5}\left(\frac{1}{2}\right)^n + \frac{2}{5}\left(-\frac{1}{3}\right)^n\right)u[n]
+\end{align*}
+
+\paragraph{b)}
+
+\begin{align*}
+    H(z)&=\frac{z^{-2}}{\left(1-\frac{i}{2}z^{-1}\right)\left(1+\frac{i}{2}z^{-1}\right)}\\
+    &=z^{-2} \frac{1}{\left(1-\frac{i}{2}z^{-1}\right)\left(1+\frac{i}{2}z^{-1}\right)}\\
+    &=z^{-2} \frac{1}{\left(1-\frac{i}{2}z^{-1}\right)\left(1+\frac{i}{2}z^{-1}\right)}\\
+    &=z^{-2}\left(\frac{1}{2\left(1-\frac{i}{2}z^{-1}\right)}+ \frac{1}{2\left(1+\frac{i}{2}z^{-1}\right)}\right)\\
+    h[n]&= -\frac{1}{2}\left(\left(\frac{i}{2}\right)^{n-2} + \left(-\frac{i}{2}\right)^{n-2}\right)u[-n+1]
+\end{align*}
+
+\paragraph{c)}
+
+\begin{align*}
+    H(z)&=\frac{10}{9\left(1-\frac{1}{2}z^{-1}\right)} - \frac{1}{9\left(1+\frac{1}{4}z^{-1}\right)}\\
+    h[n]&=-\frac{1}{9}\left(10\left(\frac{1}{2}\right)^n - \left(-\frac{1}{4}\right)^n \right)u[-n-1]
+\end{align*}
+
+\end{document}
