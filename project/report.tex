@@ -118,12 +118,20 @@ r1=power1-powerT;
 r2=power2-powerT;
 y=4.25+exp(-r1+var1/2)-exp(-r2+var2/2);
 \end{verbatim}
-We can also smooth the data so it is easier to work with. I found the following
-moving average filter with window size 50 worked well.
+
+\section{Denoising}
+
+We can also smooth the data so it is easier to work with. Experimentally, I found that the following
+moving average filter with window size 50 worked well. If I tried to make the window
+size larger, my amplitude would change too significantly. If I tried to make the window
+size smaller, it would appear more jagged.
 \begin{verbatim}
 y=smoothdata(y,'movmean',50);
 \end{verbatim}
-This results in the following unsmoothed and smoothed signals.
+I tested exponential smoothing as well, but I felt that it did not make sense because we want
+to reduce the effect of very large or small outliers. Exponential smoothing weights the current
+value of the signal higher than past values, so it would not have the desired effect at outliers.
+In the end I obtained the following unsmoothed and smoothed signals.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=2.5in]{y-unsmoothed.pdf}
@@ -135,6 +143,12 @@ This results in the following unsmoothed and smoothed signals.
 
 We will now try to fit the generated signal to the following form.
 \[y=A\sin(\omega t + \phi) + b\]
+I computed the amplitude, frequency, phase, and DC component of \(y\) all in the time domain instead using
+the DFT or other methods presented in class. This is because by operating in the time domain
+I could calculate these parameters for each period of \(y\) and obtain a mean and standard deviation
+for my each of my calculations. Any other technique that I could think of could not easily generate multiple
+estimates of the parameters.
+
 To estimate the mean and amplitude of the source position, begin by observing that there
 are approximately two peaks every 10 seconds. Thus I will split up the signal into windows
 that are 5 seconds or 1000 samples long, which is approximately one period. I want the window
