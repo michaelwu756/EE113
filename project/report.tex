@@ -19,7 +19,7 @@ receiver. We model the received power with the following formula.
 
 \section{Normalizing Noise}
 
-Assume the noise in the received power signal is log-normal distributed, so we can take the logarithm
+Assume the noise in the received power signal is log-normal distributed~\cite{So}, so we can take the logarithm
 and rewrite this as follows.
 \begin{align*}
     \ln(P_{r,l})-\ln(P_t)&=-\ln\left(4 + (y-y_l)^2\right) + n_l\\
@@ -220,5 +220,8 @@ good fit, and confirms that my methods worked well. The standard deviations of m
 The only value with relatively high standard deviation is \(\phi\). Two standard deviations around the mean for \(\phi\)
 has a range of about \(\frac{\pi}{2}\), which is somewhat high. I attempted many methods of calculating \(\phi\)
 but this seems to be around the best fit that I could achieve.
+
+\bibliographystyle{plain}
+\bibliography{references}
 
 \end{document}
